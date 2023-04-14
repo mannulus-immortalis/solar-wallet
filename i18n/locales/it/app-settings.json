@@ -35,6 +35,24 @@
         }
       }
     },
+    "thousands": {
+      "off": {
+        "label": "off"
+      },
+      "space": {
+        "label": "lo spazio"
+      },
+      "comma": {
+        "label": ","
+      },
+      "apos": {
+        "label": "'"
+      },
+      "text": {
+        "primary": "Separatore delle migliaia",
+        "secondary": "Separatore delle migliaia per la formattazione dei numeri dei saldi"
+      }
+    },
     "multi-sig": {
       "text": {
         "primary": "Abilita firma multipla",

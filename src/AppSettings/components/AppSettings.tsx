@@ -12,6 +12,7 @@ import ManageTrustedServicesDialog from "./ManageTrustedServicesDialog"
 import {
   BiometricLockSetting,
   HideMemoSetting,
+  ThousandsSeparatorSetting,
   LanguageSetting,
   MultiSigSetting,
   TestnetSetting,
@@ -53,6 +54,13 @@ function AppSettings() {
     [i18n, settings]
   )
 
+  const switchThousandsSeparator = React.useCallback(
+    (sep: string) => {
+      settings.setThousandsSeparator(sep)
+    },
+    [settings]
+  )
+
   return (
     <Carousel current={showSettingsOverview ? 0 : 1}>
       <List style={{ padding: isSmallScreen ? 0 : "24px 16px" }}>
@@ -72,6 +80,7 @@ function AppSettings() {
           value={settings.showTestnet || hasTestnetAccount}
         />
         <HideMemoSetting onToggle={settings.toggleHideMemos} value={settings.hideMemos} />
+        <ThousandsSeparatorSetting onSelect={switchThousandsSeparator} value={settings.thousandsSeparator} />
         <MultiSigSetting onToggle={settings.toggleMultiSignature} value={settings.multiSignature} />
         {trustedServicesEnabled ? <TrustedServicesSetting onClick={navigateToTrustedServices} /> : undefined}
       </List>

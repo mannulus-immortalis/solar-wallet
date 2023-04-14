@@ -25,6 +25,7 @@ function trimBalance(balance: BigNumber): string {
 
 export interface BalanceFormattingOptions {
   groupThousands?: boolean
+  thousandsSeparator?: string
   maximumDecimals?: number
   maximumSignificants?: number
   minimumDecimals?: number
@@ -37,12 +38,12 @@ export function formatBalance(input: BigNumber | string, options: BalanceFormatt
   }
 
   const balance = BigNumber(input)
-  const thousandsSeparator = ","
   const {
     groupThousands = true,
+    thousandsSeparator = "-",
     maximumDecimals = 7,
     maximumSignificants = 13,
-    minimumDecimals = 0,
+    minimumDecimals = 2,
     minimumSignificants = 0
   } = options
 
@@ -64,8 +65,9 @@ export function formatBalance(input: BigNumber | string, options: BalanceFormatt
   }
 
   return (
-    (groupThousands ? addThousandsSeparators(integerPart, thousandsSeparator) : integerPart) +
-    (decimalPart ? "." + decimalPart : "")
+    (groupThousands && thousandsSeparator != "-"
+      ? addThousandsSeparators(integerPart, thousandsSeparator)
+      : integerPart) + (decimalPart ? "." + decimalPart : "")
   )
 }
 

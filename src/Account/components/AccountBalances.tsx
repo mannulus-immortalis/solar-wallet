@@ -4,6 +4,7 @@ import { useLiveAccountData } from "~Generic/hooks/stellar-subscriptions"
 import { BalanceLine } from "~Generic/lib/account"
 import { formatBalance, sortBalances, BalanceFormattingOptions } from "~Generic/lib/balances"
 import { balancelineToAsset, stringifyAsset } from "~Generic/lib/stellar"
+import { SettingsContext } from "~App/contexts/settings"
 
 interface SingleBalanceProps {
   assetCode: string
@@ -22,9 +23,14 @@ export const SingleBalance = React.memo(function SingleBalance(props: SingleBala
     ? { maximumDecimals: 0, minimumDecimals: 0 }
     : balance.gt(0) && balance.lt(0.0001)
     ? { maximumDecimals: 7, minimumDecimals: 7 }
+    : balance.lt(100)
+    ? { maximumDecimals: 4, minimumDecimals: 2 }
     : balance.lt(1000)
-    ? { maximumDecimals: 4, minimumDecimals: 0 }
-    : { maximumDecimals: 0, minimumDecimals: 0 }
+    ? { maximumDecimals: 2, minimumDecimals: 2 }
+    : { maximumDecimals: 1, minimumDecimals: 1 }
+
+  const { thousandsSeparator } = React.useContext(SettingsContext)
+  formattingOptions.thousandsSeparator = thousandsSeparator
 
   const formattedBalance = formatBalance(balance, formattingOptions)
   const [integerPart, decimalPart = ""] = formattedBalance.split(".")

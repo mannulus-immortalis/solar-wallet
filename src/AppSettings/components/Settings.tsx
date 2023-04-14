@@ -10,6 +10,7 @@ import FingerprintIcon from "@material-ui/icons/Fingerprint"
 import GroupIcon from "@material-ui/icons/Group"
 import LanguageIcon from "@material-ui/icons/Language"
 import MessageIcon from "@material-ui/icons/Message"
+import ThousandsSeparatorIcon from "@material-ui/icons/Money"
 import TestnetIcon from "@material-ui/icons/MoneyOff"
 import TrustIcon from "@material-ui/icons/VerifiedUser"
 import { availableLanguages, languageNames } from "../../../i18n/index"
@@ -99,6 +100,52 @@ export const HideMemoSetting = React.memo(function HideMemoSetting(props: Settin
           ? t("app-settings.settings.memo.text.secondary.hidden")
           : t("app-settings.settings.memo.text.secondary.shown")
       }
+    />
+  )
+})
+
+interface ThousandsSeparatorSettingProps {
+  onSelect: (sep: string) => void
+  value: string | null | undefined
+}
+
+export const ThousandsSeparatorSetting = React.memo(function ThousandsSeparatorSetting(props: LanguageSettingProps) {
+  const { onSelect } = props
+  const classes = useSettingsStyles(props)
+  const { t } = useTranslation()
+
+  const handleChange = React.useCallback(
+    (event: React.ChangeEvent<{ value: unknown }>) => {
+      onSelect(event.target.value as string)
+    },
+    [onSelect]
+  )
+  return (
+    <AppSettingsItem
+      actions={
+        <Select
+          onChange={handleChange}
+          style={{ marginLeft: 8 }}
+          value={props.value}
+          SelectDisplayProps={{ style: { paddingLeft: 8 } }}
+        >
+          <MenuItem key="1" value="-">
+            {t("app-settings.settings.thousands.off.label")}
+          </MenuItem>
+          <MenuItem key="2" value=" ">
+            {t("app-settings.settings.thousands.space.label")}
+          </MenuItem>
+          <MenuItem key="3" value=",">
+            {t("app-settings.settings.thousands.comma.label")}
+          </MenuItem>
+          <MenuItem key="4" value="'">
+            {t("app-settings.settings.thousands.apos.label")}
+          </MenuItem>
+        </Select>
+      }
+      icon={<ThousandsSeparatorIcon className={classes.icon} />}
+      primaryText={t("app-settings.settings.thousands.text.primary")}
+      secondaryText={t("app-settings.settings.thousands.text.secondary")}
     />
   )
 })

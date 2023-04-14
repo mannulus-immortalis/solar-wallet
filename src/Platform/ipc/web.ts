@@ -156,7 +156,8 @@ function initSettings() {
     multisignature: true,
     testnet: true,
     trustedServices: [],
-    hideMemos: false
+    hideMemos: false,
+    thousandSeparator: "-"
   }
 
   callHandlers[Messages.BioAuthAvailable] = () => ({ available: false, enrolled: false })

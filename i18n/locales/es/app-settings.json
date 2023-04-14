@@ -35,6 +35,24 @@
         }
       }
     },
+    "thousands": {
+      "off": {
+        "label": "no"
+      },
+      "space": {
+        "label": "El espacio"
+      },
+      "comma": {
+        "label": ","
+      },
+      "apos": {
+        "label": "'"
+      },
+      "text": {
+        "primary": "Separador de miles",
+        "secondary": "Separador de miles para formato de número de saldos"
+      }
+    },
     "multi-sig": {
       "text": {
         "primary": "Habilitar firmas múltiples",

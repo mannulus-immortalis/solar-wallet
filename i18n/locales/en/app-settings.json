@@ -35,6 +35,24 @@
         }
       }
     },
+    "thousands": {
+      "off": {
+        "label": "off"
+      },
+      "space": {
+        "label": "space"
+      },
+      "comma": {
+        "label": ","
+      },
+      "apos": {
+        "label": "'"
+      },
+      "text": {
+        "primary": "Thousands separator",
+        "secondary": "Thousands separator for balances number formatting"
+      }
+    },
     "multi-sig": {
       "text": {
         "primary": "Enable Multi-Signature",

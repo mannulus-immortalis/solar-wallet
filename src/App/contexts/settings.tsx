@@ -34,6 +34,7 @@ interface ContextType {
   toggleMultiSignature: () => void
   toggleTestnet: () => void
   toggleHideMemos: () => void
+  setThousandsSeparator: (sep: string) => void
   trustedServices: TrustedService[]
   updateAvailable: boolean
 }
@@ -46,6 +47,7 @@ const initialSettings: SettingsState = {
   agreedToTermsAt: undefined,
   biometricLock: false,
   hideMemos: false,
+  thousandsSeparator: "-",
   initialized: false,
   multisignature: false,
   testnet: false,
@@ -75,6 +77,7 @@ const SettingsContext = React.createContext<ContextType>({
   toggleMultiSignature: () => undefined,
   toggleTestnet: () => undefined,
   toggleHideMemos: () => undefined,
+  setThousandsSeparator: () => undefined,
   trustedServices: initialSettings.trustedServices,
   updateAvailable: false
 })
@@ -134,6 +137,11 @@ export function SettingsProvider(props: Props) {
   const toggleTestnet = () => updateSettings({ testnet: !settings.testnet })
   const toggleHideMemos = () => updateSettings({ hideMemos: !settings.hideMemos })
 
+  const setThousandsSeparator = (sep: string) => {
+    updateSettings({ thousandsSeparator: sep })
+    forceRerender()
+  }
+
   const setLanguage = (language: string | undefined) => {
     if (language) {
       localStorage.setItem("i18nextLng", language)
@@ -165,6 +173,7 @@ export function SettingsProvider(props: Props) {
     biometricAvailability,
     confirmToC,
     hideMemos: settings.hideMemos,
+    thousandsSeparator: settings.thousandsSeparator,
     ignoreSignatureRequest,
     ignoredSignatureRequests,
     initialized: settings.initialized,
@@ -178,6 +187,7 @@ export function SettingsProvider(props: Props) {
     toggleMultiSignature,
     toggleTestnet,
     toggleHideMemos,
+    setThousandsSeparator,
     trustedServices: settings.trustedServices,
     updateAvailable
   }
